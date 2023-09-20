@@ -15,6 +15,7 @@ import com.example.parse_html_using_jsoup.ui.theme.ParsehtmlusingjsoupTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        JsoupClient().printTitle()
         setContent {
             ParsehtmlusingjsoupTheme {
                 // A surface container using the 'background' color from the theme

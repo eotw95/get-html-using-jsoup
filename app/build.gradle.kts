@@ -69,4 +69,7 @@ dependencies {
 
     // Jsoup
     implementation ("org.jsoup:jsoup:1.13.1")
+
+    // livedata
+    implementation("androidx.compose.runtime:runtime-livedata:1.3.2")
 }

@@ -21,7 +21,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
@@ -35,7 +37,7 @@ class MainActivity : ComponentActivity() {
     private val _html = MutableLiveData<String>()
     private val html: LiveData<String> = _html
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,6 +52,8 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         var inputUrl by remember{ mutableStateOf("") }
+                        val keyboadController = LocalSoftwareKeyboardController.current
+
                         TextField(
                             value = inputUrl,
                             onValueChange = { text ->
@@ -61,6 +65,7 @@ class MainActivity : ComponentActivity() {
                             keyboardActions = KeyboardActions(
                                 onDone = {
                                     parseHtmFromUrl(inputUrl)
+                                    keyboadController?.hide()
                                 }
                             )
                         )
